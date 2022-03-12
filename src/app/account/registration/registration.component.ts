@@ -10,7 +10,7 @@ import {Accountinfo} from '../accountinfo';
 export class RegistrationComponent implements OnInit {
   regForm: FormGroup;
   datasaved = false;
-  massage: string;
+  message: string;
   constructor(private formbuilder: FormBuilder, private accountservice: AccountserviceService) { }
 
   ngOnInit() {
@@ -33,9 +33,10 @@ export class RegistrationComponent implements OnInit {
   }
   createuserAccount(accinfo:Accountinfo) {
     this.accountservice.createaccount(accinfo).subscribe(
-      () => {
+      (resResult) => {
+        // let resp=JSON.stringify(resResult);
         this.datasaved = true;
-        this.massage = "User Created";
+        this.message = resResult['msg'];
        this.regForm.reset();
       }
     )
