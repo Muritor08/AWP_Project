@@ -15,7 +15,7 @@ function checkEmail(req,res,next){
  if(err) throw err;
  if(data){
   return res.status(200).json({
-    msg:"Email Already Exits",
+    msg:"Email Already Exists",
     results:data
 });
  }
