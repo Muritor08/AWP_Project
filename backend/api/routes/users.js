@@ -84,7 +84,7 @@ router.post("/login",function(req,res,next){
   .then(user=>{
       if(user.length<1){
           res.status(200).json({
-            msg:"Auth Failed",
+            msg:"Incorrect Email or Password",
             UserData:'',
             status:'error'
           });
@@ -92,7 +92,7 @@ router.post("/login",function(req,res,next){
           bcrypt.compare(req.body.Password, user[0].password, function(err, result) {
              if(err){
               res.json({
-                msg:"Auth Failed",
+                msg:"Incorrect Email or Password",
                 UserData:'',
                 status:'error'
               });
@@ -105,7 +105,7 @@ router.post("/login",function(req,res,next){
               });
              }else{
               res.json({
-                msg:"Auth Failed",
+                msg:"Incorrect Email or Password",
                 UserData:'',
                 status:'error'
               });
