@@ -1,8 +1,9 @@
-
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import {AccountserviceService} from '../accountservice.service';
 import {Userloginfo} from '../userloginfo';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +15,11 @@ export class LoginComponent implements OnInit {
   message: string;
   status:string;
 
-  constructor(private formbuilder: FormBuilder, private accountservice: AccountserviceService) { }
+  constructor(private formbuilder: FormBuilder, private accountservice: AccountserviceService, private router:Router) {
+    if(localStorage.getItem('Loginuser')){
+      router.navigate(['/']);
+    }
+   }
 
   ngOnInit(): void {
     this.setFormState();
@@ -41,7 +46,8 @@ export class LoginComponent implements OnInit {
         this.message = resResult['msg'];
         this.status = resResult['status'];
         if(resResult['status']=='success'){
-        localStorage.setItem('Loginuser',resp)
+        localStorage.setItem('Loginuser',resp);
+        this.router.navigate(['/']);
         }else{
           localStorage.removeItem('Loginuser');
         }

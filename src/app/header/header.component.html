@@ -24,14 +24,20 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isLoggedin">
           <a class="nav-link" routerLink="/register" routerLinkActive="active">
           Register</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isLoggedin">
           <a class="nav-link" href="/login">Login</a>
         </li>
-    </ul>
+
+        <li class="nav-item" *ngIf="isLoggedin">
+          <!-- <a class="nav-link" href="/" (click)="onLogout()">Logout</a> -->
+          <button (click)="onLogout()" class="logout_button">Logout</button>  
+        </li>
+
+      </ul>
 
     </div>
   </div>

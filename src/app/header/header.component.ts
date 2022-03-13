@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -6,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  isLoggedin=false;
+  constructor(private router:Router) {
+    if(localStorage.getItem('Loginuser')){
+      this.isLoggedin=true;
+    }
+   }
 
   ngOnInit(): void {
   }
@@ -16,6 +21,12 @@ navbarCollapsed = true;
 
 toggleNavbarCollapsing() {
     this.navbarCollapsed = !this.navbarCollapsed;
+}
+
+onLogout(){
+  localStorage.removeItem('Loginuser');
+  this.isLoggedin=false;
+  this.router.navigate(['/']);
 }
 
 }
